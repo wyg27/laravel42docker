@@ -1,0 +1,14 @@
+version: "3.7"
+
+services:
+  app:
+    image: wyg27/laravel42-php8:v8.0.7
+    ports:
+      - 8080:80
+    working_dir: /var/www/html
+    volumes:
+      - ./:/var/www/html:cached
+
+  redis:
+    image: redis:6.0.6
+
