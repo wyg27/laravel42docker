@@ -24,6 +24,7 @@ RUN apt-get update - \
     && a2enmod headers 
 
 COPY ./000-default.conf /etc/apache2/sites-available
+COPY --from=composer /usr/bin/composer /usr/bin/composer
 
 WORKDIR /var/www/html
 
