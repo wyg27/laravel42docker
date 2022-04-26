@@ -1,3 +1,15 @@
+# 利用本 Dockerfile 在本地 build docker image 的方法
+
+```
+$ docker build -t [image name] .
+```
+
+比如：
+
+```
+$ docker build -t wyg27/laravel42docker:local .
+```
+
 # 利用本 docker 设置开发环境的步骤
 
 1、安装 Docker Desktop（Mac OS/Windows）
