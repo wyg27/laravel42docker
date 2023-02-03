@@ -7,26 +7,32 @@ RUN apt-get update - \
     libjpeg-dev \
     libz-dev \
     libzip-dev \
+    libssl-dev \
     zip \
     zlib1g-dev \
-    libonig-dev \
-    && pecl install mcrypt \
-    && pecl install mongodb \
-	&& docker-php-ext-configure pcntl --enable-pcntl \
-	&& docker-php-ext-configure gd --with-jpeg \
-    && docker-php-ext-install \
-	mbstring \
+    libonig-dev
+    
+RUN pecl install mcrypt \
+    && pecl install mongodb
+    
+
+RUN docker-php-ext-install \
+    mbstring \
     zip \
     pdo_mysql \
-	mysqli \
+    mysqli \
     bcmath \
-	pcntl \
-	gd \
-    && docker-php-ext-enable mongodb \
-    && cp /usr/local/etc/php/php.ini-development /usr/local/etc/php/php.ini \
+    pcntl \
+    gd
+
+RUN docker-php-ext-configure pcntl --enable-pcntl \
+    && docker-php-ext-configure gd --with-jpeg \
+    && docker-php-ext-enable mongodb   
+    
+RUN cp /usr/local/etc/php/php.ini-development /usr/local/etc/php/php.ini \
     && echo extension=mcrypt.so >> /usr/local/etc/php/php.ini \
     && a2enmod rewrite \
-    && a2enmod headers 
+    && a2enmod headers
     
 
 COPY ./000-default.conf /etc/apache2/sites-available
